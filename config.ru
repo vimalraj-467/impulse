@@ -1,4 +1,10 @@
 require 'sinatra/base'
+require 'dotenv'
+require 'mongoid'
+
+Dotenv.load('.env')
+
+Mongoid.load!('config/mongoid.yml')
 
 require './app/impulse_controller'
 

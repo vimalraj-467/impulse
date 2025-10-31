@@ -1,9 +1,10 @@
 class FlashSaleController < ImpulseController
-  get "/:sale_id" do |sale_id|
-    sale_id
-  end
-
-  get '/' do
-    "Hello, World! from Flash Sale"
+  get "/:name" do |name|
+    flash_sale = FlashSale.where(name: name).first
+    if flash_sale.nil?
+      status 404
+      return "Flash sale not found"
+    end
+    flash_sale.to_json
   end
 end
