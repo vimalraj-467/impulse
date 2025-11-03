@@ -8,7 +8,7 @@ class FlashSaleController < ImpulseController
   include Services::FlashSale::FlashSaleService
 
   post '/' do
-    flash_sale_dto = parse_request_body(Services::FlashSale::Dto::CreateFlashSaleRequest)
+    flash_sale_dto = parse_request_body(CreateFlashSaleRequest)
 
     flash_sale = create_flash_sale(flash_sale_dto)
 

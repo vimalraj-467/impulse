@@ -2,6 +2,7 @@
 
 require 'sinatra/base'
 require 'dotenv'
+
 require 'mongoid'
 
 Dotenv.load('.env')
