@@ -16,6 +16,6 @@ class FlashSaleController < ImpulseController
 
     flash_sale = create_flash_sale(flash_sale_dto.to_hash)
 
-    Platform::Utils::JsonUtils.send_response(200, Services::FlashSale::Dto::FlashSaleResponse.new(flash_sale).to_response)
+    Platform::Utils::JsonUtils.send_response(200, FlashSaleResponse.from_entity(flash_sale))
   end
 end
