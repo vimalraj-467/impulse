@@ -24,3 +24,4 @@ end
 
 map('/api/v1') { run ImpulseController }
 map('/api/v1/flash-sales') { run FlashSaleController }
+map('/api/v1/users') { run UserController }

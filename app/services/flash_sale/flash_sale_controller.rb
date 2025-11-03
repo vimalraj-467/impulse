@@ -8,14 +8,10 @@ class FlashSaleController < ImpulseController
   include Services::FlashSale::FlashSaleService
 
   post '/' do
-    request_data = Platform::Utils::JsonUtils.parse(request.body.read)
+    flash_sale_dto = parse_request_body(Services::FlashSale::Dto::CreateFlashSaleRequest)
 
-    flash_sale_dto = Services::FlashSale::Dto::CreateFlashSaleRequest.new(request_data)
+    flash_sale = create_flash_sale(flash_sale_dto)
 
-    flash_sale_dto.validate!
-
-    flash_sale = create_flash_sale(flash_sale_dto.to_hash)
-
-    Platform::Utils::JsonUtils.send_response(200, FlashSaleResponse.from_entity(flash_sale))
+    Platform::Utils::JsonUtils.send_response(201, FlashSaleResponse.from_entity(flash_sale))
   end
 end
