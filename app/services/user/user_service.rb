@@ -12,6 +12,14 @@ module Services
 
         saved_user
       end
+
+      def get_user(external_id)
+        user = ::User.find_by(external_id: external_id)
+
+        raise NotFoundException if user.nil?
+
+        user
+      end
     end
   end
 end

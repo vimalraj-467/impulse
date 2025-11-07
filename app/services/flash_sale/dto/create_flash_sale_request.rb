@@ -26,7 +26,6 @@ class CreateFlashSaleRequest
     errors << 'active is required' if @active.blank?
     errors << 'user_id is required' if @user_id.blank?
 
-
     raise ValidationException, errors.join(', ') unless errors.empty?
   end
 

@@ -14,4 +14,10 @@ class UserController < ImpulseController
 
     Platform::Utils::JsonUtils.send_response(201, UserResponse.from_entity(user))
   end
+
+  get '/:external_id' do
+    user = get_user(params[:external_id])
+
+    Platform::Utils::JsonUtils.send_response(200, UserResponse.from_entity(user))
+  end
 end

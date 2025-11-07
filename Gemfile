@@ -16,3 +16,9 @@ gem 'redis', '~> 5.4'
 gem 'bunny', '~> 2.24'
 
 gem 'rubocop', '~> 1.81', require: false
+
+gem 'telegram-bot-ruby', '~> 2.4'
+
+gem 'sidekiq', '~> 8.0'
+
+gem 'clockwork', '~> 3.0'

@@ -20,6 +20,28 @@ module Platform
       def get(key)
         @redis.get(key)
       end
+
+      def get_and_decrement(key)
+        lua_script = <<~LUA
+          local key = KEYS[1]
+          local current = redis.call('GET', key)
+
+          if not current then
+            return {0, -1}#{'  '}
+          end
+
+          current = tonumber(current)
+
+          if current <= 0 then
+            return {0, -2}#{' '}
+          end
+
+          local new_value = redis.call('DECR', key)
+          return {1, new_value}
+        LUA
+
+        @redis.eval(lua_script, keys: [key])
+      end
     end
   end
 end

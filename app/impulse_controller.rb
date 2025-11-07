@@ -3,12 +3,14 @@
 require './app/platform/exceptions/base_exception'
 
 class ImpulseController < Sinatra::Base
+  enable :sessions
+
   def parse_request_body(dto_class)
     request_data = Platform::Utils::JsonUtils.parse(request.body.read)
 
     dto = dto_class.new(request_data)
 
-    dto.validate!
+    dto.validate! if dto.respond_to?(:validate!)
 
     dto.to_hash
   end
@@ -32,7 +34,7 @@ class ImpulseController < Sinatra::Base
   error BaseException do |exception|
     puts "Error: =====> #{exception.to_hash.to_json}"
 
-    halt(exception.status, { status: exception.status, message: exception.message }.to_json)
+    halt(exception.status, { status: exception.status, code: exception.error_code, message: exception.message }.to_json)
   end
 
   error do

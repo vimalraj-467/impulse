@@ -10,8 +10,36 @@ class FlashSaleController < ImpulseController
   post '/' do
     flash_sale_dto = parse_request_body(CreateFlashSaleRequest)
 
-    flash_sale = create_flash_sale(flash_sale_dto)
+    flash_sale = create(flash_sale_dto)
 
-    Platform::Utils::JsonUtils.send_response(201, FlashSaleResponse.from_entity(flash_sale))
+    Platform::Utils::JsonUtils.send_response(201, flash_sale)
+  end
+
+  get '/upcoming' do
+    flash_sales = get_upcoming
+
+    Platform::Utils::JsonUtils.send_response(201, flash_sales)
+  end
+
+  get '/search' do
+    Platform::Utils::JsonUtils.send_response(201, search(params[:query]))
+  end
+
+  get '/:id' do
+    flash_sale = get(params[:id])
+
+    Platform::Utils::JsonUtils.send_response(201, flash_sale)
+  end
+
+  delete '/:id' do
+    delete(params[:id])
+  end
+
+  patch '/:id' do
+    flash_sale_dto = parse_request_body(UpdateFlashSaleRequest)
+
+    flash_sale = update(params[:id], flash_sale_dto)
+
+    Platform::Utils::JsonUtils.send_response(201, flash_sale)
   end
 end
