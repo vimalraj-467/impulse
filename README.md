@@ -1,5 +1,5 @@
 # Impulse
-Manage e-commerce flash sales
+Manage e-commerce flash sales using a telegram bot
 
 # Tech Stack:
 1. Ruby
@@ -11,14 +11,19 @@ Manage e-commerce flash sales
 7. Redis - Atomic locking of inventory for handling flash sales
 
 # Sample APIs
-
+```
 @url = {{flash_sale_url}}/api/v1
+```
 
 ### Health
+```angular2html
 GET {{url}}/health
 Content-Type: application/json
+```
+
 
 ### Create User
+```
 POST {{url}}/users
 Content-Type: application/json
 
@@ -26,12 +31,16 @@ Content-Type: application/json
 "nickname": "vimal",
 "external_id": "wizkid07"
 }
+```
 
 ### Fetch User
+```
 GET {{url}}/users/wizkid07
+```
 
 
 ### Create Flash Sale and scheduled sidekiq job
+```
 POST {{url}}/flash-sales
 Content-Type: application/json
 
@@ -45,29 +54,38 @@ Content-Type: application/json
 "active": true,
 "user_id": "690887bca8d36f0830e11e87"
 }
+```
 
 ### Fetch Sale
+```
 GET {{url}}/flash-sales/690998d0930deeafaae02d15
+```
 
 
 ### Fetch Upcoming Sales
+```
 GET {{url}}/flash-sales/upcoming
+```
 
 ### Update Sale
+```
 PATCH {{url}}/flash-sales/690998d0930deeafaae02d15
 
 {
 "description": "Old Nike",
 "name": "Nike",
 "inventory_quantity": 90
-
 }
+```
 
 ### Full Text Search using elastic search
+```
 GET {{url}}/flash-sales/search?query=abibas
+```
 
 
 ### Create flash sale order using redis for atomic operations to over-selling
+```
 POST {{url}}/orders
 Content-Type: application/json
 
@@ -75,3 +93,4 @@ Content-Type: application/json
 "user_id": "690887bca8d36f0830e11e87",
 "sale_id": "690b325c46d1e8c06acfd002"
 }
+```

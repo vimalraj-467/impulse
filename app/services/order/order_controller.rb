@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require './app/services/order/order_service'
 class OrderController < ImpulseController
   include Services::Order
